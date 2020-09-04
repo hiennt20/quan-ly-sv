@@ -1,0 +1,20 @@
+h1 {
+    text-align: center;
+}
+
+.add-student {
+    margin-bottom: 20px;
+}
+
+.btn {
+    margin-bottom: 20px;
+}
+
+.edit {
+    color: #17a2b8;
+
+}
+
+.remove {
+    color: #dc3545;
+}
