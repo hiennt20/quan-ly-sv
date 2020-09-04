@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"
         integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
 
-    <title>bảng học viên thêm chức năng xóa, chỉnh sửa, thay đổi thông tin</title>
-
+    <title>bảng học viên</title>
+  
 </head>
 
 <body>
@@ -36,7 +36,7 @@
         </div>
     </div>
 
-
+    
     <div class="container">
         <h1>danh sách học viên</h1>
         <a href="input-student.html">
@@ -55,7 +55,68 @@
                 </tr>
             </thead>
             <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                    <td>
+                        <a href="chinh-sua.html" class="edit">
 
+                            <i class="fa fa-edit"></i>
+                            chỉnh sửa
+
+                        </a>|
+                        <a href="#" class="remove" data-toggle="modal" data-target="#exampleModal">
+
+                            <i class="fa fa-trash-alt"></i>
+                            xóa
+
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                    <td>
+                        <a href="chinh-sua.html" class="edit">
+
+                            <i class="fa fa-edit"></i>
+                            chỉnh sửa
+
+                        </a>|
+                        <a href="#" class="remove" data-toggle="modal" data-target="#exampleModal">
+
+                            <i class="fa fa-trash-alt"></i>
+                            xóa
+
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>Larry</td>
+                    <td>the Bird</td>
+                    <td>@twitter</td>
+                    <td>
+                        <a href="chinh-sua.html" class="edit">
+
+                            <i class="fa fa-edit"></i>
+                            chỉnh sửa
+                        </a>|
+                        <!-- gọi thông báo ra bằng js -->
+                        <!-- <a href="#" class="remove"  onclick="thongBaoXoa()"> -->
+
+                        <a href="#" class="remove" data-toggle="modal" data-target="#exampleModal">
+
+                            <i class="fa fa-trash-alt"></i>
+                            xóa
+
+                        </a>
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>
@@ -72,10 +133,10 @@
 
             $('#exampleModal').modal('show')
         }
-        /*
-        đổ thông tin của học viên vào web,
-        mỗi lần đều phải chạy lại server bằng lệnh cd fake...node.js, sau đó là npm install -> npm start trên git bash
-        */
+/*
+đổ thông tin của học viên vào web,
+mỗi lần đều phải chạy lại server bằng lệnh cd fake...node.js, sau đó là npm install -> npm start trên git bash
+*/
         $(function () {
             $.ajax({
                 url: "http://localhost:3000/users",
@@ -108,27 +169,8 @@
                 </tr>`
                 }
                 $('tbody').html(htmlString);
-            });
+                });
         })
-
-
-
-        // chỉnh sửa học viên
-        //    B1: tìm thông tin học viên theo id 
-        $.ajax({
-            url: "http://localhost:3000/users",
-            context: document.body
-        }).done(function (users) {
-            let htmlString = "";
-                for (let user of users) {
-                    htmlString += `<tr ${users.id}>
-                    <td>${user.name}</td>
-                    <td>${user.birthday}</td>
-                    <td>${user.email}</td>
-                    <td>${user.phone}</td>
-        });
-
-        // xóa thông tin học viên
 
 
 
