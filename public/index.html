@@ -30,7 +30,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">hủy</button>
-                    <button type="button" class="btn btn-primary">đồng ý</button>
+                    <button type="button" class="btn btn-primary" onclick="xacNhanXoa()">đồng ý</button>
                 </div>
             </div>
         </div>
@@ -66,16 +66,15 @@
 
     <script src="bootstrap.min.js"></script>
 
-    <!-- gọi thông báo ra bằng js -->
-    <script>
-        function thongBaoXoa() {
 
-            $('#exampleModal').modal('show')
-        }
+    <script>
+
         /*
         đổ thông tin của học viên vào web,
         mỗi lần đều phải chạy lại server bằng lệnh cd fake...node.js, sau đó là npm install -> npm start trên git bash
         */
+        let studentId = 0;
+
         $(function () {
             $.ajax({
                 url: "https://hien-quan-ly-sv.herokuapp.com/users",
@@ -83,26 +82,24 @@
             }).done(function (users) {
                 let htmlString = "";
                 for (let user of users) {
-                    htmlString += `<tr>
+                    htmlString += `<tr id = "${user.id}">
                     <td>${user.name}</td>
                     <td>${user.birthday}</td>
                     <td>${user.email}</td>
                     <td>${user.phone}</td>
                     <td>
-                        <a href="chinh-sua.html" class="edit">
+                        <a href="chinh-sua.html?id=${user.id}" class="edit">
 
                             <i class="fa fa-edit"></i>
                             chỉnh sửa
                         </a>|
-                        <!-- gọi thông báo ra bằng js -->
-                        <!-- <a href="#" class="remove"  onclick="thongBaoXoa()"> -->
 
-                        <a href="#" class="remove" data-toggle="modal" data-target="#exampleModal">
-
+                        <a href="#" class="remove"  onclick="thongBaoXoa(${user.id})">
                             <i class="fa fa-trash-alt"></i>
                             xóa
 
                         </a>
+
                     </td>
                     
                 </tr>`
@@ -111,30 +108,59 @@
             });
         })
 
-
+        // xóa thông tin học viên
+        //    gọi thông báo ra bằng js 
+        function thongBaoXoa(id) {
+            studentId = id;
+            $('#exampleModal').modal('show')
+        }
+        function xacNhanXoa() {
+            $.ajax({
+                url: "https://hien-quan-ly-sv.herokuapp.com/users/" + studentId,
+                method: "DELETE",
+                // đến đây là đã dữ liệu trên database nhưng còn trang web thì cần reload lại mới nhìn thấy bị xóa 
+            }).done(function (result) {
+                // console.log("Da xoa");
+                location.reload();
+                // thay vì phải bấm nút reload thì lệnh này tạo cho trang web tự động reload 
+            })
+            // console.log(studentId);
+               
+        }
 
         // chỉnh sửa học viên
         //    B1: tìm thông tin học viên theo id 
-       /* $.ajax({
-            url: "https://hien-quan-ly-sv.herokuapp.com/users",
-            context: document.body
-        }).done(function (users) {
-            let htmlString = "";
-                for (let user of users) {
-                    htmlString += `<tr ${users.id}>
-                    <td>${user.name}</td>
-                    <td>${user.birthday}</td>
-                    <td>${user.email}</td>
-                    <td>${user.phone}</td>
-        });
+        // function chinhSua(id){
+        //     studentId = id;
+        //     $.ajax({
+        //         url: "https://hien-quan-ly-sv.herokuapp.com/users/" + studentId,
+        //         method: "GET",
+        //     }).done(function(result){
 
-        // xóa thông tin học viên
+        //     })
+        // }
+        /* $.ajax({
+             url: "https://hien-quan-ly-sv.herokuapp.com/users",
+             context: document.body
+         }).done(function (users) {
+             let htmlString = "";
+                 for (let user of users) {
+                     htmlString += `<tr ${users.id}>
+                     <td>${user.name}</td>
+                     <td>${user.birthday}</td>
+                     <td>${user.email}</td>
+                     <td>${user.phone}</td>
+         });
 
-*/
+
+
+ */
 
 
 
     </script>
 </body>
+<!-- gọi thông báo ra bằng html -->
+<!-- <a href="#" class="remove" data-toggle="modal" data-target="#exampleModal"> -->
 
 </html>

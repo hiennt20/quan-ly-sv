@@ -65,8 +65,8 @@
     
                     </a>
                 </button>
-                <button class="btn btn-success">
-                    <a href="#" target="_blank">
+                <button class="btn btn-success" onclick="capNhat()">
+                    <a href="index.html">
 
                         <i class="fa fa-save"></i>
                         lưu
@@ -81,6 +81,37 @@
 
     <script src="jquery-3.5.1.min.js"></script>
     <script src="bootstrap.min.js"></script>
+    <script>
+      
+      let getLink = new URLSearchParams(window.location.search);
+let getId = getLink.get("id");
+
+        $(function(){
+            
+            $.ajax({
+                url: "https://hien-quan-ly-sv.herokuapp.com/users" + "/" + getId,
+            context:document.body
+            }).done(function(users){
+                $("#name").val(users.name);
+                $("#year").val(users.birthday);
+                $("#email").val(users.email);
+                $("#phone").val(users.phone);
+               
+            })
+        })
+        function capNhat(){
+            $.ajax({
+                url: "https://hien-quan-ly-sv.herokuapp.com/users" + "/" + getId,
+                method: "PUT",
+                data:{
+                    "name": $("#name").val(),
+                    "email": $("#email").val(),
+                    "birthday": $("#year").val(),
+                    "phone": $("#phone").val(),
+                } 
+            })
+        }
+    </script>
 </body>
 
 </html>
