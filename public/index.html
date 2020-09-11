@@ -1,166 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"
+      integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc"
+      crossorigin="anonymous"
+    />
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="index.css">
-    <link rel="stylesheet" href="bootstrap.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"
-        integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
+    <title>
+      bảng học viên thêm chức năng xóa, chỉnh sửa, thay đổi thông tin
+    </title>
+  </head>
 
-    <title>bảng học viên thêm chức năng xóa, chỉnh sửa, thay đổi thông tin</title>
-
-</head>
-
-<body>
+  <body>
     <!-- nội dung hiển thị thông báo khi xóa  -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">xác nhận xóa học viên</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    bạn có muốn xóa không?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">hủy</button>
-                    <button type="button" class="btn btn-primary" onclick="xacNhanXoa()">đồng ý</button>
-                </div>
-            </div>
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">
+              xác nhận xóa học viên
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">bạn có muốn xóa không?</div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              hủy
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="xacNhanXoa()"
+            >
+              đồng ý
+            </button>
+          </div>
         </div>
+      </div>
     </div>
-
 
     <div class="container">
-        <h1>danh sách học viên</h1>
-        <a href="input-student.html">
-            <button type="button" class="btn btn-success">
-                <i class="fas fa-plus-circle"></i>
-                thêm học viên</button>
-        </a>
-        <table class="table table-striped table-hover">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">họ và tên</th>
-                    <th scope="col">năm sinh</th>
-                    <th scope="col">email</th>
-                    <th scope="col">số điện thoại</th>
-                    <th scope="col"></th>
-                </tr>
-            </thead>
-            <tbody>
+      <h1>danh sách học viên</h1>
+      <a href="input-student.html">
+        <button type="button" class="btn btn-success">
+          <i class="fas fa-plus-circle"></i>
+          thêm học viên
+        </button>
+      </a>
+      <table class="table table-striped table-hover">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">
+              <div class="arrange">
+                <div>họ và tên</div>
+                <div>
+                  <i class="fas fa-chevron-circle-down" class="down"></i>
+                  <i class="fas fa-chevron-circle-up"></i>
+                </div>
+              </div>
 
-            </tbody>
-        </table>
+              <!-- <div class="down"><i class="fas fa-chevron-circle-down"></i></div>
+                        <div class="up"><i class="fas fa-chevron-circle-up"></i></div> -->
+            </th>
+            <th scope="col">
+              <div class="arrange">
+                <div>nam sinh</div>
+                <div>
+                  <i class="fas fa-chevron-circle-down" class="down"></i>
+                  <i class="fas fa-chevron-circle-up"></i>
+                </div>
+              </div>
+
+              <!-- <div class="down"><i class="fas fa-chevron-circle-down"></i></div>
+                        <div class="up"><i class="fas fa-chevron-circle-up"></i></div> -->
+            </th>
+            <th scope="col">email</th>
+            <th scope="col">số điện thoại</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
     </div>
 
+    <!-- thêm nút hiển thị từng trang cho trang web  -->
+    <div id="page-indicator"></div>
 
     <script src="jquery-3.5.1.min.js"></script>
     <!-- bản slim của jquery-3 đã bị loại bỏ ajax -->
 
     <script src="bootstrap.min.js"></script>
-
-
-    <script>
-
-        /*
-        đổ thông tin của học viên vào web,
-        mỗi lần đều phải chạy lại server bằng lệnh cd fake...node.js, sau đó là npm install -> npm start trên git bash
-        */
-        let studentId = 0;
-
-        $(function () {
-            $.ajax({
-                url: "https://hien-quan-ly-sv.herokuapp.com/users",
-                context: document.body
-            }).done(function (users) {
-                let htmlString = "";
-                for (let user of users) {
-                    htmlString += `<tr id = "${user.id}">
-                    <td>${user.name}</td>
-                    <td>${user.birthday}</td>
-                    <td>${user.email}</td>
-                    <td>${user.phone}</td>
-                    <td>
-                        <a href="chinh-sua.html?id=${user.id}" class="edit">
-
-                            <i class="fa fa-edit"></i>
-                            chỉnh sửa
-                        </a>|
-
-                        <a href="#" class="remove"  onclick="thongBaoXoa(${user.id})">
-                            <i class="fa fa-trash-alt"></i>
-                            xóa
-
-                        </a>
-
-                    </td>
-                    
-                </tr>`
-                }
-                $('tbody').html(htmlString);
-            });
-        })
-
-        // xóa thông tin học viên
-        //    gọi thông báo ra bằng js 
-        function thongBaoXoa(id) {
-            studentId = id;
-            $('#exampleModal').modal('show')
-        }
-        function xacNhanXoa() {
-            $.ajax({
-                url: "https://hien-quan-ly-sv.herokuapp.com/users/" + studentId,
-                method: "DELETE",
-                // đến đây là đã dữ liệu trên database nhưng còn trang web thì cần reload lại mới nhìn thấy bị xóa 
-            }).done(function (result) {
-                // console.log("Da xoa");
-                location.reload();
-                // thay vì phải bấm nút reload thì lệnh này tạo cho trang web tự động reload 
-            })
-            // console.log(studentId);
-               
-        }
-
-        // chỉnh sửa học viên
-        //    B1: tìm thông tin học viên theo id 
-        // function chinhSua(id){
-        //     studentId = id;
-        //     $.ajax({
-        //         url: "https://hien-quan-ly-sv.herokuapp.com/users/" + studentId,
-        //         method: "GET",
-        //     }).done(function(result){
-
-        //     })
-        // }
-        /* $.ajax({
-             url: "https://hien-quan-ly-sv.herokuapp.com/users",
-             context: document.body
-         }).done(function (users) {
-             let htmlString = "";
-                 for (let user of users) {
-                     htmlString += `<tr ${users.id}>
-                     <td>${user.name}</td>
-                     <td>${user.birthday}</td>
-                     <td>${user.email}</td>
-                     <td>${user.phone}</td>
-         });
-
-
-
- */
-
-
-
-    </script>
-</body>
-<!-- gọi thông báo ra bằng html -->
-<!-- <a href="#" class="remove" data-toggle="modal" data-target="#exampleModal"> -->
-
+    <script src="index.js"></script>
+  </body>
+  <!-- gọi thông báo ra bằng html -->
+  <!-- <a href="#" class="remove" data-toggle="modal" data-target="#exampleModal"> -->
 </html>

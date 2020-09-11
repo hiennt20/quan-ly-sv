@@ -18,3 +18,13 @@ h1 {
 .remove {
     color: #dc3545;
 }
+.arrange{
+    display: flex;
+
+
+}
+.down{
+    margin-left: 10px;
+    margin-right: 10px;
+ 
+}
